@@ -700,7 +700,7 @@ int main(int argc, char *argv[]) {
         scanf(" %[^\n]s", command);
         
         if (strcmp(command, "q") == 0) {
-            printf("Number of executed commands is.. %i\n", cmd_counter);
+            printf("Number of executed commands is : %i\n", cmd_counter);
             printf("Exiting the filesystem. Saving all changes.\n");
             if (file_system != NULL) {
                 fclose(file_system);
@@ -749,13 +749,15 @@ int main(int argc, char *argv[]) {
             if (strlen(to_filename) > 14) {
                 printf("Target file name  %s is too long:%i, maximum length is 14",to_filename,strlen(to_filename));
                 status=1;
-            } else
+            } else {
                 status = cpin(from_filename,to_filename,file_system);
+            }
             
-            if (status == 0)
+            if (status == 0) {
                 printf("\nFile  successfully copied\n");
-            else
+            } else {
                 printf("\nFile copy failed\n");
+            }
 
         } else if (strcmp(command,"cpout")==0){
             printf("cpout was requested\n");
@@ -764,28 +766,31 @@ int main(int argc, char *argv[]) {
             p = strtok (NULL, " ");
             const char *to_filename = p;
             status = cpout(from_filename,to_filename,file_system);
-            if (status ==0)
+            if (status ==0) {
                 printf("\nFile %s successfully copied\n",from_filename);
-            else
-                printf("\nFile copy failed\n");		
+            } else {
+                printf("\nFile copy failed\n");
+            }
         } else if (strcmp(command,"rm")==0){
             printf("rm was requested\n");
             char *  p    = strtok (NULL, " ");
             const char *filename = p;
             status = Rm(filename,file_system);
-            if (status ==0)
+            if (status ==0) {
                 printf("\nFile  successfully removed\n");
-            else
-                printf("\nFile removal failed\n");		
+            } else {
+                printf("\nFile removal failed\n");
+            }
         } else if (strcmp(command,"mkdir") == 0) {
             printf("mkdir was requested\n");
             char *  p    = strtok (NULL, " ");
             const char *filename = p;
             status = make_directory(filename,file_system);
-            if (status ==0)
+            if (status ==0) {
                 printf("\nDirectory %s successfully created\n",filename);
-            else
-                printf("\nDirectory creation failed\n");		
+            } else {
+                printf("\nDirectory creation failed\n");	
+            }
         } else {
             printf("Not valid command. Available commands: initfs, cpin, cpout, rm, q, mkdir. Please try again\n");
         }
